@@ -1,9 +1,6 @@
 {
-    "extends": "rallycoding",
-    "globals": {
-        "fetch": true
-        },
-    "rules": {
-        "arrow-body-style": 0
-        }
+  "extends": "rallycoding",
+  "globals": {
+    "fetch": true
+  }
 }

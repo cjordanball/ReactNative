@@ -1,34 +1,33 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { View, Text } from 'react-native';
 import firebase from 'firebase';
-import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import reducers from './reducers';
-import LoginForm from './components/LoginForm';
-
 
 class App extends Component {
 	componentWillMount() {
-		const config = {
-			apiKey: 'AIzaSyDU8H7r7BtteWjKVShzT17_gcDi9nk5yDY',
-			authDomain: 'manager-e37a1.firebaseapp.com',
-			databaseURL: 'https://manager-e37a1.firebaseio.com',
-			projectId: 'manager-e37a1',
-			storageBucket: 'manager-e37a1.appspot.com',
-			messagingSenderId: '703568854518'
-		};
-		firebase.initializeApp(config);
+    const config = {
+      apiKey: 'AIzaSyDV2d__xukPGa2eyBsRWwt3BiRDsDYlcHo',
+      authDomain: 'manager-f5cd8.firebaseapp.com',
+      databaseURL: 'https://manager-f5cd8.firebaseio.com',
+      projectId: 'manager-f5cd8',
+      storageBucket: 'manager-f5cd8.appspot.com',
+      messagingSenderId: '279519645328'
+    };
+    firebase.initializeApp(config);
 	}
-
 	render() {
-        const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
-        return (
-            <Provider store={store}>
-                <LoginForm />
-            </Provider>
-        );
-    }
+		return (
+			<Provider store={createStore(reducers)}>
+				<View>
+					<Text>
+						Goodbye, Cruel World!
+					</Text>
+				</View>
+			</Provider>
+		);
+	}
 }
 
 export default App;
