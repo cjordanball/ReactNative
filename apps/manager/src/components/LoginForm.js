@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from './common';
 import * as actions from '../actions';
@@ -6,7 +7,7 @@ import * as actions from '../actions';
 class LoginForm extends Component {
 
   onEmailChange(text) {
-    console.log('onE');
+    console.log('onE', this.props.email);
     this.props.emailChanged(text);
   }
   render() {
@@ -32,4 +33,10 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, actions)(LoginForm);
+const mapStateToProps = (state) => {
+  return {
+    email: state.auth.email
+  };
+};
+
+export default connect(mapStateToProps, actions)(LoginForm);

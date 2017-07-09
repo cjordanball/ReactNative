@@ -4,13 +4,11 @@ const INITIAL_STATE = {
   email: ''
 };
 
-console.log
 
-export default (state = null, action) => {
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case Actions.EMAIL_CHANGED:
-      console.log('Hooray, it changed.');
-      return action.payload;
+      return { ...state, email: action.payload };
     default:
       return state;
   }
