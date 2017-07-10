@@ -18,17 +18,31 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = ({ email, password }) => {
-    const reqPromise = firebase.auth().signInWithEmailAndPassword(email, password);
+	const reqPromise = firebase.auth().signInWithEmailAndPassword(email, password);
 
-    return (dispatch) => {
-        reqPromise.then((user) => {
-            dispatch(
-                {
-                    type: Actions.SIGN_IN_USER,
-                    payload: user
-                }
-            );
-        });
-    };
+	return (dispatch) => {
+		dispatch({ type: Actions.LOGIN_USER });
+		reqPromise
+		.then(user => loginUserSuccess(dispatch, user)
+		)
+		.catch((err) => {
+			console.log(err);
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(user => loginUserSuccess(dispatch, user))
+            .catch(() => loginUserFail(dispatch));
+		});
+	};
 };
 
+const loginUserFail = (dispatch) => {
+	dispatch({
+		type: Actions.LOGIN_USER_FAIL
+	});
+};
+
+const loginUserSuccess = (dispatch, user) => {
+	dispatch({
+		type: Actions.LOGIN_USER_SUCCESS,
+		payload: user
+	});
+};
